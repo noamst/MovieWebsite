@@ -1,0 +1,33 @@
+/* Navbar.css */
+
+.navbar {
+    position: fixed; /* Keeps it always visible */
+    top: 10px; /* Slightly below the top */
+    right: 10px; /* Move to the right */
+    background-color: #fffa65; /* Bright yellow for energy */
+    padding: 10px 20px; /* Space around the link */
+    border: 3px solid #ff4081; /* Matching pink border */
+    border-radius: 15px; /* Rounded edges for fun */
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2); /* Add depth */
+    font-family: "Comic Sans MS", "Arial", sans-serif; /* Playful font */
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.navbar:hover {
+    background-color: #ffcc00; /* Slightly darker yellow on hover */
+    transform: scale(1.1); /* Zoom in on hover */
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3); /* Stronger shadow */
+}
+
+.navbar-link {
+    color: #ff4081; /* Vibrant pink for the link */
+    text-decoration: none; /* Remove underline */
+    font-size: 1.5rem; /* Larger, noticeable text */
+    font-weight: bold;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.navbar-link:hover {
+    color: #ffffff; /* White text on hover */
+    text-shadow: 2px 2px 5px rgba(255, 64, 129, 0.5); /* Glowing pink shadow */
+}
