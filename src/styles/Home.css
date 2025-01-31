@@ -1,0 +1,19 @@
+/* Home.css */
+.home-container {
+    background-image: url('../assets/mybackground.png'); /* Adjust the path if needed */
+    background-size: cover; /* Ensures the image covers the entire background */
+    background-repeat: no-repeat; /* Prevents repeating */
+    background-position: center; /* Centers the image */
+    height: 100vh; /* Full viewport height */
+    width: 100%; /* Full width */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Aligns children horizontally */
+    justify-content: start; /* Aligns children vertically */
+  }
+  .home-container h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 3px rgba(7, 0, 2, 0.5);
+    animation: bounce 1s infinite;
+  }

@@ -50,6 +50,39 @@ app.post('/api/addMovie', async (req, res) => {
   }
 });
 
+// API Endpoint: Remove Movie
+app.delete('/api/RemoveMovie', async (req, res) => {
+  try {
+    const { title} = req.body; // Destructure values from req.body
+    
+    if (!title) {
+      return res.status(400).json({ message: "Missing required fields" });
+    }
+
+    console.log("Attempting to remove movie:", { title});
+
+    const delete_query = `
+      DELETE FROM movietable 
+      WHERE title = $1
+      RETURNING *;  -- Returns deleted row if successful
+    `;
+
+    const result = await db.query(delete_query, [title]);
+
+    if (result.rowCount === 0) {
+      return res.status(404).json({ message: "Movie not found" });
+    }
+
+    res.json({ message: "Movie removed successfully" });
+
+  } catch (error) {
+    console.error("Error removing movie:", error.message);
+    res.status(500).json({ message: "Server Error", error: error.message });
+  }
+});
+
+
+
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);

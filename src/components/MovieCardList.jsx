@@ -1,10 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect ,useRef} from "react";
 import MovieCard from "./MovieCard";
 import "../styles/MovieCardList.css";
 
 function MovieCardList() {
   const [data, setData] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [isDeleted,SetIsDeleted] = useState(0);
+  const containerRef = useRef();
+
+  const scrollLeft = () => {
+    containerRef.current.scrollBy({ left: -300, behavior: 'smooth' });
+  };
+
+  const scrollRight = () => {
+    containerRef.current.scrollBy({ left: 300, behavior: 'smooth' });
+  };
 
   // Fetch data with searchTerm as a query parameter
   useEffect(() => {
@@ -24,7 +34,7 @@ function MovieCardList() {
     };
 
     fetchMovies();
-  }, [searchTerm]); // Re-fetch data whenever searchTerm changes
+  }, [searchTerm,isDeleted]); // Re-fetch data whenever searchTerm changes
 
   // Update searchTerm state
   function updateSearchTerm(event) {
@@ -38,16 +48,33 @@ function MovieCardList() {
         type="text"
         placeholder="Search for a movie..."
         value={searchTerm}
+        className="search-input"
       />
-      {data.map((movie, index) => (
-        <MovieCard
-          key={index} // Unique key for each MovieCard
-          title={movie.title}
-          director={movie.director}
-          description={movie.description}
-        />
-      ))}
+      {data && data.length > 0 ? (
+      <div className="carousel-container">
+        <button className="scroll-button left" onClick={scrollLeft}>
+          ◀️
+        </button>
+        <div className="movie-cards-container" ref={containerRef}>
+          {data.map((movie, index) => (
+            <MovieCard
+              key={index}
+              title={movie.title}
+              director={movie.director}
+              description={movie.description}
+              setDeleted ={SetIsDeleted}
+              isDeletedInd ={isDeleted}
+            />
+          ))}
+        </div>
+        <button className="scroll-button right" onClick={scrollRight}>
+          ▶️
+        </button>
+      </div>
+      ) : (
+        <h1>Nothing To Show</h1>)}
     </div>
+    
   );
 }
 

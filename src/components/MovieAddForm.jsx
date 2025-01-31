@@ -49,32 +49,34 @@ function MovieAddForm () {
   };
 
   return (
-    <div className="movie-add-form">
-      <h1>Add a New Movie</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Movie Title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          className="movie-input"
-        />
-        <input
-          type="text"
-          placeholder="Director"
-          value={director}
-          onChange={(e) => setDirector(e.target.value)}
-          className="movie-input"
-        />
-        <textarea
-          placeholder="Movie Description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          className="movie-input movie-textarea"
-        />
-        <button type="submit" className="movie-submit-button">Add Movie</button>
-        <h1>{result}</h1>
-      </form>
+    <div className='background-container'>
+      <div className="movie-add-form">
+        <h1>Add a New Movie</h1>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            placeholder="Movie Title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            className="movie-input"
+          />
+          <input
+            type="text"
+            placeholder="Director"
+            value={director}
+            onChange={(e) => setDirector(e.target.value)}
+            className="movie-input"
+          />
+          <textarea
+            placeholder="Movie Description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            className="movie-input movie-textarea"
+          />
+          <button type="submit" className="movie-submit-button">Add Movie</button>
+          <h1>{result}</h1>
+        </form>
+      </div>
     </div>
   );
 };

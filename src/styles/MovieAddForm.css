@@ -1,5 +1,16 @@
 /* MovieAddForm.css */
-
+.background-container{
+    background-image: url('../assets/mybackground.png'); /* Adjust the path if needed */
+    background-size: cover; /* Ensures the image covers the entire background */
+    background-repeat: no-repeat; /* Prevents repeating */
+    background-position: center; /* Centers the image */
+    height: 100vh; /* Full viewport height */
+    width: 100%; /* Full width */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Aligns children horizontally */
+    justify-content: start; /* Aligns children vertically */
+}
 .movie-add-form {
     background-color: #fffa65; /* Bright yellow for optimism */
     color: #ff4081; /* Energetic pink text */

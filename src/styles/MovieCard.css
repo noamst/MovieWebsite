@@ -1,44 +1,55 @@
-/* MovieCard.css */
+/* Ensure the movie card wrapper stays structured */
+.movie-card-wrapper {
+  background-color: black;
+  padding: 25px;
+  display: inline-block;
+  border-radius: 25px;
+  box-shadow: 0px 0px 20px 5px rgba(255, 0, 0, 0.7);
+  transition: box-shadow 0.4s ease-in-out, transform 0.3s ease;
+}
 
+.movie-card-wrapper:hover {
+  box-shadow: 0px 0px 35px 10px rgba(255, 0, 0, 0.9);
+  transform: scale(1.05);
+}
+
+/* Make sure the card allows absolute positioning */
 .movie-card {
-    background-color: #fffa65; /* Bright yellow for optimism */
-    color: #ff4081; /* Energetic and playful pink text */
-    border: 3px solid #ff4081; /* Matching playful pink border */
-    padding: 20px;
-    margin: 20px;
-    border-radius: 20px; /* Round edges for a fun look */
-    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
-    font-family: "Comic Sans MS", "Arial", sans-serif; /* Fun and playful font */
-    text-align: center;
-    transition: transform 0.3s ease, background-color 0.3s ease;
-  }
-  
-  .movie-card:hover {
-    transform: rotate(-3deg) scale(1.1); /* Tilt and zoom for a playful effect */
-    background-color: #ffcc00; /* Slightly deeper yellow on hover */
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3); /* Stronger shadow on hover */
-  }
-  
-  .movie-card h1 {
-    font-size: 2.5rem; /* Big, bold, and fun title */
-    margin-bottom: 15px;
-    text-shadow: 2px 2px 3px rgba(255, 64, 129, 0.5); /* Subtle pink shadow */
-    animation: bounce 1s infinite; /* Add a playful bounce animation */
-  }
-  
-  .movie-card p {
-    font-size: 1.2rem; /* Slightly larger, clear description */
-    line-height: 1.6;
-    color: #333; /* Neutral color for readability */
-  }
-  
-  /* Bounce animation for the title */
-  @keyframes bounce {
-    0%, 100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-10px);
-    }
-  }
-  
+  background-color: #fffa65;
+  color: #ff4081;
+  border: 3px solid #ff4081;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 20px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+  font-family: "Comic Sans MS", "Arial", sans-serif;
+  text-align: center;
+  position: relative; /* Allows button positioning inside */
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+/* Floating delete button */
+.scroll-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 8px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+.scroll-button:hover {
+  background-color: darkred;
+  transform: scale(1.2);
+}
+.h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 3px rgba(255, 64, 129, 0.5);
+  animation: bounce 1s infinite;
+}

@@ -1,11 +1,87 @@
-/* MovieCardList.css */
-.movie-card-list input {
-    width: 80%;
-    padding: 10px;
-    margin: 20px auto;
-    border: 2px solid #ccc;
-    border-radius: 5px;
-    font-size: 1rem;
-    display: block;
-  }
-  
+/* Container for the entire movie card list */
+.movie-card-list {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Search input styling */
+.search-input {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+/* Carousel container for the scrolling effect */
+.carousel-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* The horizontally scrollable container */
+.movie-cards-container {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding-bottom: 10px;
+}
+
+.movie-cards-container::-webkit-scrollbar {
+  display: none; /* Hides the scrollbar */
+}
+
+/* Individual movie card styling */
+.movie-card {
+  flex: 0 0 auto; /* Prevents shrinking or growing */
+  width: 200px; /* Fixed width for the cards */
+  height: 300px; /* Fixed height for the cards */
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  text-align: center;
+}
+
+/* Navigation buttons */
+.scroll-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scroll-button:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.scroll-button.left {
+  left: 10px;
+}
+
+.scroll-button.right {
+  right: 10px;
+}
+.movie-card-list h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 3px rgba(7, 0, 2, 0.5);
+  animation: bounce 1s infinite;
+}
