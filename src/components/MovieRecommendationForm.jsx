@@ -13,8 +13,6 @@ function MovieRecommendationForm() {
       setLoading(true);
       setRecommendation('');
       console.log("got here");
-      //Replace this fetch  call with your own LLM API endpoint or OpenAI's API call
-      // For example, if you have an endpoint /api/recommend that calls your LLM:
       fetch('http://localhost:5000/api/recommend', {
          method: 'POST',
          headers: { 'Content-Type': 'application/json' },
