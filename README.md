@@ -67,7 +67,7 @@
       embeddings VECTOR(1536) , -- match the dimension for your embedding model
       imdb_link TEXT
     );
-'''
+
 
 
 
