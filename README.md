@@ -85,6 +85,8 @@ Create or update a .env file with the following variables (example layout):
   GROQ_API_KEY = your_key
   OPENAI_API_KEY = your_key
 '''
+
+
 **Usage**
 
   Open your browser to http://localhost:3000.
