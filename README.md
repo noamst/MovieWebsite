@@ -53,51 +53,35 @@
     Install PostgreSQL if you don’t have it already.
     Ensure the PostgreSQL server is running on port 5432.
   2. Install pgvector Extension
-  For PostgreSQL 13 or later:
-    '''
-      git clone https://github.com/pgvector/pgvector
-      cd pgvector
-      make
-      sudo make install
-    '''
-
-  Enable the extension in your database:
-
-'''
-    CREATE EXTENSION IF NOT EXISTS vector;
-'''
+  3.Enable the extension in your database.
   4. Create the movies Table
   In your PostgreSQL database (e.g., using psql, pgAdmin, etc.), run:
 '''
     CREATE TABLE IF NOT EXISTS movies (
       id SERIAL PRIMARY KEY,
-      title TEXT NOT NULL,
-      director TEXT,
+      title VARCHAR(255),
+      director VARCHAR(255),
       description TEXT,
-      imdb_link TEXT,
-      embeddings VECTOR(1536)  -- match the dimension for your embedding model
+      embeddings VECTOR(1536) , -- match the dimension for your embedding model
+      imdb_link TEXT
     );
 '''
+
+
+
 Navigate to the backend folder:
   cd backend
 Create or update a .env file with the following variables (example layout):
 '''
-  OPENAI_API_KEY=<YourOpenAIKey>
-  
-  PG_HOST=localhost
-  PG_PORT=5432
-  PG_USER=<YourPostgresUsername>
-  PG_PASSWORD=<YourPostgresPassword>
-  PG_DATABASE=<YourPostgresDatabaseName>
+DB_HOST=localhost
+DB_PORT=5432
+DB_USER=your_user 
+DB_PASSWORD=your_pass
+DB_NAME=your_DB
+GROQ_API_KEY = your_key
+OPENAI_API_KEY = your_key
+
 '''
-  GROQ_API_KEY=<YourGroqApiKey>  # for the Llama3 8B calls
-  GROQ_API_URL=<Optional: base URL for Groq if needed>
-  OPENAI_API_KEY: Your OpenAI API Key (for embeddings).
-  GROQ_API_KEY: Your Groq API Key (to access Llama3 8B).
-  PG_*: Postgres connection details.
-
-
-
 **Usage**
 
   Open your browser to http://localhost:3000.
@@ -114,7 +98,7 @@ Homepage -
     ![image](https://github.com/user-attachments/assets/1cb10b63-76f8-4bc3-90fd-c52b241f1d57)
 Recommendation Screen - 
     ![image](https://github.com/user-attachments/assets/9d397d41-2236-425b-9c08-bdfed02f436a)
-Interactive Search Bar - 
+
     
 **License**
 
