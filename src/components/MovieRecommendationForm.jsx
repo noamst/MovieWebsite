@@ -13,7 +13,7 @@ function MovieRecommendationForm() {
       setLoading(true);
       setRecommendation('');
       console.log("got here");
-      fetch('http://localhost:5000/api/recommend', {
+      fetch('http://localhost:5001/api/recommend', {
          method: 'POST',
          headers: { 'Content-Type': 'application/json' },
          body: JSON.stringify({ userDescription: description }),

@@ -4,7 +4,7 @@ import cors from "cors";
 import OpenAI from "openai";
 
 const app = express();
-const PORT = 5000;
+const PORT = 5001;
 
 // Middleware
 app.use(cors());
@@ -114,16 +114,16 @@ app.get('/api/data', async (req, res) => {
 // API Endpoint: Add Movie
 app.post('/api/addMovie', async (req, res) => {
   try {
-    const { title, director, description } = req.body; // Destructure values from req.body
-    console.log("New movie data:", { title, director, description });
+    const { title, director, description , imdb_link } = req.body; // Destructure values from req.body
+    console.log("New movie data:", { title, director, description ,imdb_link});
     const queryEmbedding = await computeEmbedding(description);
 
     const post_query = `
-      INSERT INTO movietable (title, director, description , embedding)
-      VALUES ($1, $2, $3 , $4);
+      INSERT INTO movietable (title, director, description , embedding , imdb_link)
+      VALUES ($1, $2, $3 , $4 , $5);
     `;
     
-    const result = await db.query(post_query, [title, director, description,queryEmbedding]); // No wildcards needed here
+    const result = await db.query(post_query, [title, director, description,queryEmbedding , imdb_link]); // No wildcards needed here
     //console.log("Insert result:", result);
     res.json({ message: "Movie added successfully" });
   } catch (error) {
@@ -211,7 +211,27 @@ app.post('/api/recommend', async (req, res) => {
   }
 });
 
-
+// API Endpoint: Get Movie by ID
+app.get('/api/movie/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const movie_query = `
+      SELECT title , director , description , imdb_link FROM movietable
+      WHERE id = $1;
+    `;
+    
+    const result = await db.query(movie_query, [id]);
+    
+    if (result.rows.length === 0) {
+      return res.status(404).json({ message: "Movie not found" });
+    }
+    console.log(result.rows[0]);
+    res.json(result.rows[0]);
+  } catch (error) {
+    console.error("Error fetching movie details:", error.message);
+    res.status(500).send('Server Error');
+  }
+});
 
 // Start the server
 app.listen(PORT, () => {

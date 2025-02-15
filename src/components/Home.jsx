@@ -7,7 +7,7 @@ function Home() {
   return (
     <div className="home-container">
       <Navbar/>
-      <h1>Welcome to my app</h1>
+      <h1>Welcome to my Movies App</h1>
       <MovieCardList/>
     </div>
   );

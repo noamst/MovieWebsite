@@ -21,7 +21,7 @@ function MovieCardList() {
     const fetchMovies = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/api/data?title=${encodeURIComponent(searchTerm)}`
+          `http://localhost:5001/api/data?title=${encodeURIComponent(searchTerm)}`
         );
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
@@ -59,6 +59,7 @@ function MovieCardList() {
           {data.map((movie, index) => (
             <MovieCard
               key={index}
+              id = {movie.id}
               title={movie.title}
               director={movie.director}
               description={movie.description}

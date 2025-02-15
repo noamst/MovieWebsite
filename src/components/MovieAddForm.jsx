@@ -5,6 +5,7 @@ function MovieAddForm () {
   const [title, setTitle] = useState('');
   const [director, setDirector] = useState('');
   const [description, setDescription] = useState('');
+  const [imdbLink, setImdbLink] = useState('');
   const [result,setResult] = useState('');
 
   
@@ -15,9 +16,9 @@ function MovieAddForm () {
     console.log("GOT HERE");
 
     if (title.trim() && description.trim()) {
-      const request = { title: title.trim() , director:director.trim(), description: description.trim() };
+      const request = { title: title.trim() , director:director.trim(), description: description.trim() , imdb_link:imdbLink.trim() };
       console.log(request);
-      fetch("http://localhost:5000/api/addMovie", {
+      fetch("http://localhost:5001/api/addMovie", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -36,6 +37,7 @@ function MovieAddForm () {
           setTitle("");
           setDirector("");
           setDescription("");
+          setImdbLink("");
           setResult("Success");
           console.log("Server Response:", data);
         })
@@ -67,12 +69,20 @@ function MovieAddForm () {
             onChange={(e) => setDirector(e.target.value)}
             className="movie-input"
           />
+          <input
+            type="text"
+            placeholder="Imdb URL"
+            value={imdbLink}
+            onChange={(e) => setImdbLink(e.target.value)}
+            className="movie-input"
+          />
           <textarea
             placeholder="Movie Description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             className="movie-input movie-textarea"
           />
+
           <button type="submit" className="movie-submit-button">Add Movie</button>
           <h1>{result}</h1>
         </form>

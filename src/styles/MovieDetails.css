@@ -1,0 +1,11 @@
+body {
+    background-image: url('../assets/modern-white.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.title, .description {
+    font-weight: bold;
+    color: black;
+}
