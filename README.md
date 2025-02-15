@@ -1,70 +1,122 @@
-# Getting Started with Create React App
+**Movie Recommendation App (RAG + pgvector + Groq LLM)**
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+  This project provides movie recommendations using RAG (Retrieval-Augmented Generation) techniques, combined with a Groq API call to a Llama3 8B language model to explain why a     particular movie was recommended.
+  
+  It uses:
+  
+  Node.js (Express) for the backend
+  React for the frontend
+  PostgreSQL (with pgvector extension) for storing and querying vector embeddings
+  OpenAI Embeddings API for generating embeddings (using text-embedding-3-small, though text-embedding-ada-002 is also common)
+  Groq API to run the Llama3 8B LLM, providing a short explanation on why the recommended movie aligns with the user’s query.
+  
 
-## Available Scripts
+**Overview**
 
-In the project directory, you can run:
+  The application allows users to get movie recommendations by querying a PostgreSQL database (with pgvector) to find the closest movie descriptions by vector similarity. Once the   top match is found, the App calls the Groq API to run a Llama3 8B language model. This LLM provides a short text explaining why the selected movie fits the user’s query.
 
-### `npm start`
+**Flow**
+  User Input: The user describes what kind of movie they want (e.g., “I’d like a thrilling action movie.”).
+  Embedding Generation: The backend calls the OpenAI API to convert the user’s query into a vector (dimension 1536).
+  Vector Similarity Query: We use pgvector in PostgreSQL to find the movie(s) whose descriptions have the highest cosine similarity to the user’s query vector.
+  LLM Explanation: The backend then calls the Groq API with Llama3 8B to generate a short explanation of why this recommended movie is the closest match to the user’s request.
+  Recommendation & Explanation: The system returns the recommended movie data (title, director, description, IMDb link) along with a short explanation from the LLM.
+  Ports:
+  
+    PostgreSQL runs on port 5432 (default).
+    Node.js (Express) backend runs on port 5001.
+    React frontend runs on port 3000.
+    
+    
+**Prompt** 
+  ![image](https://github.com/user-attachments/assets/5294ce55-b97b-496d-acd9-397b7d18e260)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+**Prerequisites**
 
-### `npm test`
+  To run this project locally, you need:
+  
+  Node.js (v14+ recommended)
+  npm or yarn (for installing dependencies)
+  PostgreSQL (v13+ recommended) with the pgvector extension
+  OpenAI API Key (for embedding generation)
+  OpenAI to create an API key
+  Groq API Key (for the Llama3 8B model calls)
+  Groq API or the relevant hosting platform for Llama3 8B
+  
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+**Database Setup**
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+  1. Install and Run PostgreSQL
+    Install PostgreSQL if you don’t have it already.
+    Ensure the PostgreSQL server is running on port 5432.
+  2. Install pgvector Extension
+  For PostgreSQL 13 or later:
+    '''
+      git clone https://github.com/pgvector/pgvector
+      cd pgvector
+      make
+      sudo make install
+    '''
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+  Enable the extension in your database:
 
-### `npm run eject`
+'''
+    CREATE EXTENSION IF NOT EXISTS vector;
+'''
+  4. Create the movies Table
+  In your PostgreSQL database (e.g., using psql, pgAdmin, etc.), run:
+'''
+    CREATE TABLE IF NOT EXISTS movies (
+      id SERIAL PRIMARY KEY,
+      title TEXT NOT NULL,
+      director TEXT,
+      description TEXT,
+      imdb_link TEXT,
+      embeddings VECTOR(1536)  -- match the dimension for your embedding model
+    );
+'''
+Navigate to the backend folder:
+  cd backend
+Create or update a .env file with the following variables (example layout):
+'''
+  OPENAI_API_KEY=<YourOpenAIKey>
+  
+  PG_HOST=localhost
+  PG_PORT=5432
+  PG_USER=<YourPostgresUsername>
+  PG_PASSWORD=<YourPostgresPassword>
+  PG_DATABASE=<YourPostgresDatabaseName>
+'''
+  GROQ_API_KEY=<YourGroqApiKey>  # for the Llama3 8B calls
+  GROQ_API_URL=<Optional: base URL for Groq if needed>
+  OPENAI_API_KEY: Your OpenAI API Key (for embeddings).
+  GROQ_API_KEY: Your Groq API Key (to access Llama3 8B).
+  PG_*: Postgres connection details.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+**Usage**
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+  Open your browser to http://localhost:3000.
+  Enter your movie preference in the search box (e.g., “I want a heartwarming romantic comedy.”).
+  The app will:
+  Generate an embedding of your query via OpenAI.
+  Query the Postgres database to find the closest match(es) by cosine similarity.
+  Call the Groq API with Llama3 8B to generate a short explanation of why this movie is a good match.
+  Present the recommendation: Title, Director, Description, IMDb link, and the explanation from Llama3 8B.
 
-## Learn More
+**Use Examples -** 
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Homepage -
+    ![image](https://github.com/user-attachments/assets/1cb10b63-76f8-4bc3-90fd-c52b241f1d57)
+Recommendation Screen - 
+    ![image](https://github.com/user-attachments/assets/9d397d41-2236-425b-9c08-bdfed02f436a)
+Interactive Search Bar - 
+    
+**License**
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+  This project is for educational/demo use. You can adapt it freely for your own purposes. Enjoy building and learning from it!
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
