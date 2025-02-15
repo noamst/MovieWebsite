@@ -58,7 +58,7 @@
   In your PostgreSQL database (e.g., using psql, pgAdmin, etc.), run:
 
 
-'''
+'''sql
     CREATE TABLE IF NOT EXISTS movies (
       id SERIAL PRIMARY KEY,
       title VARCHAR(255),
