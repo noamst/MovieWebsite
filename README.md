@@ -58,15 +58,17 @@
   In your PostgreSQL database (e.g., using psql, pgAdmin, etc.), run:
 
 
-'''sql
-    CREATE TABLE IF NOT EXISTS movies (
-      id SERIAL PRIMARY KEY,
-      title VARCHAR(255),
-      director VARCHAR(255),
-      description TEXT,
-      embeddings VECTOR(1536) , -- match the dimension for your embedding model
-      imdb_link TEXT
-    );
+```sql
+CREATE TABLE IF NOT EXISTS movies (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(255),
+    director VARCHAR(255),
+    description TEXT,
+    embeddings VECTOR(1536), -- match the dimension for your embedding model
+    imdb_link TEXT
+);
+```
+---
 
 
 
@@ -75,17 +77,20 @@ Navigate to the backend folder:
   cd backend
 Create or update a .env file with the following variables (example layout):
 
+```ini
+DB_HOST=localhost
+DB_PORT=5432
+DB_USER=your_user
+DB_PASSWORD=your_pass
+DB_NAME=your_DB
 
-'''
-  DB_HOST=localhost
-  DB_PORT=5432
-  DB_USER=your_user 
-  DB_PASSWORD=your_pass
-  DB_NAME=your_DB
-  GROQ_API_KEY = your_key
-  OPENAI_API_KEY = your_key
-'''
+GROQ_API_KEY=your_key
+OPENAI_API_KEY=your_key
+```
 
+Replace `your_user`, `your_pass`, `your_DB`, and API keys with your actual values.
+
+---
 
 **Usage**
 
