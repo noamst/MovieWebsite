@@ -56,6 +56,8 @@
   3.Enable the extension in your database.
   4. Create the movies Table
   In your PostgreSQL database (e.g., using psql, pgAdmin, etc.), run:
+
+
 '''
     CREATE TABLE IF NOT EXISTS movies (
       id SERIAL PRIMARY KEY,
@@ -72,15 +74,16 @@
 Navigate to the backend folder:
   cd backend
 Create or update a .env file with the following variables (example layout):
-'''
-DB_HOST=localhost
-DB_PORT=5432
-DB_USER=your_user 
-DB_PASSWORD=your_pass
-DB_NAME=your_DB
-GROQ_API_KEY = your_key
-OPENAI_API_KEY = your_key
 
+
+'''
+  DB_HOST=localhost
+  DB_PORT=5432
+  DB_USER=your_user 
+  DB_PASSWORD=your_pass
+  DB_NAME=your_DB
+  GROQ_API_KEY = your_key
+  OPENAI_API_KEY = your_key
 '''
 **Usage**
 
